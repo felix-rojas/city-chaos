@@ -35,7 +35,9 @@ public class WebClient : MonoBehaviour
             www.SetRequestHeader("Content-Type", "application/json");
 
             yield return www.SendWebRequest();          // Talk to Python
-            if(www.isNetworkError || www.isHttpError)
+            /// Use (UnityWebRequest.result == UnityWebRequest.Result.ConnectionError) instead.'
+            /// UnityWebRequestwww.result == UnityWebRequest.Result.ProtocolError
+            if(www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.Log(www.error);
             }
